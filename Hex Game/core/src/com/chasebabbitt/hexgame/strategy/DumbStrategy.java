@@ -1,8 +1,7 @@
 package com.chasebabbitt.hexgame.strategy;
 
 import com.badlogic.gdx.utils.Array;
-import com.chasebabbitt.hexgame.Duel;
-import com.chasebabbitt.hexgame.HexGame;
+import com.chasebabbitt.hexgame.actors.Player;
 import com.chasebabbitt.hexgame.card.Card;
 
 public class DumbStrategy implements Strategy {
@@ -13,7 +12,7 @@ public class DumbStrategy implements Strategy {
 	 * @param an object of type HexGame
 	 * @return returns a Move object that represents a suggested defense move
 	 */
-	public Move getMove(Duel game) {
+	public Move getMove(Player defender, Player attacker) {
 		// TODO Auto-generated method stub
 		Card defendingcard=null;
 		Card attackingcard=null;
@@ -22,15 +21,15 @@ public class DumbStrategy implements Strategy {
 		Move move = null;
 		
 		//An array of cards that represents all the attacking cards the opponent controls
-		Array<Card> attackingcards = game.getAttackingCards();
+		Array<Card> attackingcards = attacker.getCards();
 		//An Array of cards that that defending player controls
-		Array<Card> defendingcards = game.getDefendingCards();
+		Array<Card> defendingcards = defender.getCards();
 		//An Array of cards that represents a legal defending move
 		Array<Card> legalblockingcards = new Array<Card>();
 		
 		if(attackingcards.size>0){
 			attackingcard = attackingcards.first();
-			game.removeAttackingCard(attackingcard);
+			attacker.removeAttackingCard(attackingcard);
 		}
 		//If there are no attacking cards, return a null move
 		if(attackingcard == null)
@@ -52,10 +51,12 @@ public class DumbStrategy implements Strategy {
 		
 		if(legalblockingcards.size>0){
 			defendingcard = legalblockingcards.first();
-			game.removeDefendingCard(defendingcard);
+			defender.removeDefendingCard(defendingcard);
+			move = new BlockedAttack(attackingcard,defendingcard,attacker,defender);
 		}
-		
-		move = new Move(attackingcard,defendingcard);
+		else{
+			move = new UnblockedAttack(attackingcard,attacker,defender);
+		}
 		return move;
 	}
 

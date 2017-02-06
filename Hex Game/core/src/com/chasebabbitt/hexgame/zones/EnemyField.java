@@ -7,13 +7,15 @@ import com.chasebabbitt.hexgame.card.CardGenerator;
 
 public class EnemyField {
 	Array<Card> enemycards;
+	CardGenerator generator;
 	public EnemyField(){
 		enemycards = new Array<Card>();
+		generator = new CardGenerator();
 		
 	}
 	public void addCard(){
 		Card newcard;
-		newcard = CardGenerator.getCard();
+		newcard = generator.getCard();
 		//newcard.setPosition(170*enemycards.size, 480);
 		enemycards.add(newcard);
 		//System.out.println("Card added. Position: "+newcard.getX()+","+newcard.getY()+".");
@@ -22,7 +24,7 @@ public class EnemyField {
 	//Method for adding a specific card to the enemy field based on an index number
 	public void addCard(int cardindex){
 		Card newcard;
-		newcard = CardGenerator.getCard(cardindex);
+		newcard = generator.getCard(cardindex);
 		enemycards.add(newcard);
 	}
 	
