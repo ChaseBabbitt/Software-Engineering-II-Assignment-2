@@ -10,23 +10,27 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class Card extends Sprite{
 	
 	// Bit masks for card keywords
-	public static final short FLY = 1;
-	public static final short SKYGUARD = 2;
-	public static final short CRUSH = 4;
-	public static final short STEADFAST = 8;
+	public static final int FLY = 1;
+	public static final int SKYGUARD = 2;
+	public static final int CRUSH = 4;
+	public static final int STEADFAST = 8;
+	public static final int SWIFTSTRIKE = 16;
+	public static final int DEATHTOUCH = 32;
+	public static final int SPEED = 64;
+	public static final int DEFENDER = 128;
 	
 	
 	String name;
 	int attackpoints;
 	int defensepoints;
 	int cost;
-	short keywords;
+	int keywords;
 	boolean tapped;
 	boolean blocked;
 	Texture image;
 	Vector2 position;
 	// Constructor for Card class for cards with no keywords
-	public Card(Texture image, String name, int cost, int attackpoints, int defensepoints){
+	/*public Card(Texture image, String name, int cost, int attackpoints, int defensepoints){
 		this(image,name,cost,attackpoints,defensepoints,(short)0);
 	}
 	
@@ -47,7 +51,7 @@ public abstract class Card extends Sprite{
 		setPosition(0,0);
 		
 		
-	}
+	}*/
 	public Card(){
 		
 	}
@@ -75,8 +79,17 @@ public abstract class Card extends Sprite{
 		return cardstats;
 	}
 	//Getter method for the keywords bitfield
-	public short getKeywords(){
+	public int getKeywords(){
 		return keywords;
+	}
+	/**
+	 * getter method for specific keywords
+	 * @param keyword keyword is a bitmask corresponding with the static keyword variables above
+	 * @return as this this is an abstract of a base component, the base case will always return false,
+	 *  as it has no keywords
+	 */
+	public boolean hasKeyword(int keyword){
+		return false;
 	}
 	public boolean tappedStatus(){
 		return tapped;
@@ -87,4 +100,6 @@ public abstract class Card extends Sprite{
 	public void untap(){
 		tapped = false;
 	}
+	//Base case of a comes into play ability, does nothing
+	public void comesIntoPlay(){} //
 }
