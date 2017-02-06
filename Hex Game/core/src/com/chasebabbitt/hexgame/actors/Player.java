@@ -46,7 +46,7 @@ public class Player {
 		this.name = name;
 		hand = new Hand();
 		field = new PlayerField();
-		deck = new Deck();
+		//deck = new Deck();
 		graveyard = new Graveyard();
 		strategy = new DefenseStrategy();
 		

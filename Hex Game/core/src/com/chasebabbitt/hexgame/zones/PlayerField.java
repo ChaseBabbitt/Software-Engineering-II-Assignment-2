@@ -52,7 +52,7 @@ public class PlayerField {
 	}
 	public void toConsole(){
 		for(Card c:playercards){
-			System.out.println(c.getName());
+			System.out.println(c.toString());
 		}
 	}
 }

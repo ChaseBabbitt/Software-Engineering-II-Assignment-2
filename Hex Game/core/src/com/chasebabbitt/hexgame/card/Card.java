@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
  * Extends the libGDX Sprite class to make the Card class, allowing the card to be
  *  displayed on the screen as a sprite
  */
-public class Card extends Sprite{
+public abstract class Card extends Sprite{
 	
 	// Bit masks for card keywords
 	public static final short FLY = 1;
@@ -32,6 +32,7 @@ public class Card extends Sprite{
 	
 	// Overloaded constructor for Card class that accepts a a short bitfield that represents keywords the card may have
 	public Card(Texture image, String name, int cost, int attackpoints, int defensepoints, short keywords){
+	
 		//System.out.println("Creating card "+name+" with keywords "+keywords);
 		this.name = name;
 		this.defensepoints = defensepoints;
@@ -45,6 +46,9 @@ public class Card extends Sprite{
 		setBounds(0,0,160,222);
 		setPosition(0,0);
 		
+		
+	}
+	public Card(){
 		
 	}
 	//Getter method for attackpoints
@@ -64,6 +68,11 @@ public class Card extends Sprite{
 	//Getter method for the name of the card
 	public String getName(){
 		return name;
+	}
+	public String toString(){
+		String cardstats = new String();
+		cardstats= name +" "+"("+attackpoints+","+defensepoints+")";
+		return cardstats;
 	}
 	//Getter method for the keywords bitfield
 	public short getKeywords(){
