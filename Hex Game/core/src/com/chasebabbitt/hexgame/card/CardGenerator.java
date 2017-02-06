@@ -2,8 +2,6 @@ package com.chasebabbitt.hexgame.card;
 
 import java.util.Random;
 
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Texture;
 
 public final class CardGenerator {
 	//AssetManager manager;
@@ -45,14 +43,14 @@ public final class CardGenerator {
 		
 		switch(cardindex){
 		case 0:
-			card = new BlasphemousHorror();
+			card = new CrushDecoration(new BlasphemousHorror());
 			//card = new Card(manager.get("Cards/Blasphemous Horror.jpg", Texture.class),"Blasphemouse Horror",6,6,6);
 			break;
 		case 1:
 			card = new DireSpider();
 			break;
 		case 2:
-			card = new DuskwingMaiden();
+			card = new FlyingDecoration(new DuskwingMaiden());
 			//card = new FlyingDecoration(new DuskwingMaiden());
 			//card = new Card(manager.get("Cards/Duskwing Maiden.jpg", Texture.class),"Duskwing Maiden",4,3,2,Card.FLY);
 			break;
@@ -65,11 +63,11 @@ public final class CardGenerator {
 			//card = new Card(manager.get("Cards/Paladin of Naagaan.jpg", Texture.class),"Paladin of Naagaan",5,3,5);
 			break;
 		case 5:
-			card = new Phantom();
+			card = new FlyingDecoration(new Phantom());
 			//card = new Card(manager.get("Cards/Phantom.jpg", Texture.class),"Phantom",1,1,1,Card.FLY);
 			break;
 		case 6:
-			card = new Rhinoceros();
+			card = new CrushDecoration(new Rhinoceros());
 			//card = new Card(manager.get("Cards/Rhinoceros.jpg", Texture.class),"Rhinoceros",3,3,3,Card.CRUSH);
 			break;
 		case 7:
@@ -81,7 +79,7 @@ public final class CardGenerator {
 			//card = new Card(manager.get("Cards/Risen Lancer.jpg", Texture.class),"Risen Lancer",2,3,1);
 			break;
 		case 9:
-			card = new RotrootEnchanter();
+			card = new SteadfastDecoration( new SkyguardDecoration(new RotrootEnchanter()));
 			//card = new Card(manager.get("Cards/Rotroot Enchanter.jpg", Texture.class),"Rotroot Enchanter",5,3,5,Card.SKYGUARD);
 			break;
 		case 10:
@@ -89,15 +87,15 @@ public final class CardGenerator {
 			//card = new Card(manager.get("Cards/Rotting Buffalo.jpg", Texture.class),"Rotting Buffalo",3,2,3);
 			break;
 		case 11:
-			card = new Smashodon();
+			card = new CrushDecoration(new Smashodon());
 			//card = new Card(manager.get("Cards/Smashodon.jpg", Texture.class),"Smashodon",6,5,5);
 			break;
 		case 12:
-			card = new SpearcliffPegasus();
+			card = new FlyingDecoration( new SpearcliffPegasus());
 			//card = new Card(manager.get("Cards/Spearcliff Pegasus.jpg", Texture.class),"Spearcliff Pegasus",3,2,1,Card.FLY);
 			break;
 		case 13:
-			card = new StalwartSpirit();
+			card = new SteadfastDecoration(new StalwartSpirit());
 			//card = new Card(manager.get("Cards/Stalwart Spirit.jpg", Texture.class),"Stalwart Spirit",4,3,3);
 			break;
 		case 14:
@@ -105,7 +103,7 @@ public final class CardGenerator {
 			//card = new Card(manager.get("Cards/Startouched Brave.jpg", Texture.class),"Startouched Brave",4,0,7);
 			break;
 		case 15:
-			card = new SterlingSkywatcher();
+			card = new SkyguardDecoration(new SterlingSkywatcher());
 			//card = new Card(manager.get("Cards/Sterling Skywatcher.jpg", Texture.class),"Sterling Skywatcher",2,2,2,Card.SKYGUARD);
 			break;
 		case 16:
@@ -113,7 +111,7 @@ public final class CardGenerator {
 			//card = new Card(manager.get("Cards/Trotting Buffalo.jpg", Texture.class),"Trotting Buffalo",2,2,3);
 			break;
 		case 17:
-			card = new TyrannosaurusHex();
+			card = new CrushDecoration(new TyrannosaurusHex());
 			//card = new Card(manager.get("Cards/Tyrannosaurus Hex.jpg", Texture.class),"Tyrannosaurus Hex",6,6,4);
 			break;
 		case 18:
@@ -125,7 +123,7 @@ public final class CardGenerator {
 			//card = new Card(manager.get("Cards/Wild Child.jpg", Texture.class),"Wild Child",2,2,2);
 			break;
 		case 20:
-			card = new ZombieVulture();
+			card = new FlyingDecoration( new ZombieVulture());
 			//card = new Card(manager.get("Cards/Zombie Vulture.jpg", Texture.class),"Zombie Vulture",5,4,1,Card.FLY);
 			break;
 		case 21:
