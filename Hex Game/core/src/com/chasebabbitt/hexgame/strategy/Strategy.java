@@ -1,9 +1,9 @@
 package com.chasebabbitt.hexgame.strategy;
 
-import com.chasebabbitt.hexgame.Duel;
-import com.chasebabbitt.hexgame.HexGame;
+
+import com.chasebabbitt.hexgame.actors.Player;
 
 public interface Strategy {
 
-	public Move getMove(Duel duel);
+	public Move getMove(Player defender, Player attacker);
 }

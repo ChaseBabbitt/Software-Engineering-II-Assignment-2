@@ -1,15 +1,16 @@
 package com.chasebabbitt.hexgame.strategy;
 
 import com.badlogic.gdx.utils.Array;
-import com.chasebabbitt.hexgame.Duel;
+import com.chasebabbitt.hexgame.actors.Player;
 import com.chasebabbitt.hexgame.card.Card;
 
 public class DefenseStrategy implements Strategy{
 
 	@Override
-	public Move getMove(Duel game) {
+	public Move getMove(Player defender, Player attacker) {
 		Move move = null;
 		// TODO Auto-generated method stub
+
 		Card defendingcard=null;
 		Card attackingcard=null;
 		int incomingdamage = 0;
@@ -17,9 +18,9 @@ public class DefenseStrategy implements Strategy{
 		System.out.println("Defense Strategy Method called.");
 		
 		//An array of cards that represents all the attacking cards the opponent controls
-		Array<Card> attackingcards = game.getAttackingCards();
+		Array<Card> attackingcards = attacker.getAttackingCards();
 		//An Array of cards that that defending player controls
-		Array<Card> defendingcards = game.getDefendingCards();
+		Array<Card> defendingcards = defender.getDefendingCards();
 		//An Array of cards that represents a legal defending move
 		Array<Card> legalblockingcards = new Array<Card>();
 		
@@ -35,7 +36,7 @@ public class DefenseStrategy implements Strategy{
 					attackingcard=c;
 			}
 			//remove the attacking card from the Enemy Field
-			game.removeAttackingCard(attackingcard);
+			attacker.removeAttackingCard(attackingcard);
 		}
 		//If there were no attacking cards(the EnemyField was empty) returns null, as no move needs to be taken
 		if(attackingcard == null)
@@ -44,14 +45,18 @@ public class DefenseStrategy implements Strategy{
 		//Pick from the defending cards all cards that would be a legal move
 		legalblockingcards = getLegalBlockers(attackingcard,defendingcards);
 		//Pick from the legal defense choices the best defense
-		defendingcard = bestDefense(attackingcard,legalblockingcards,game.getPlayerHealth(),incomingdamage);
+		defendingcard = bestDefense(attackingcard,legalblockingcards,defender.getPlayerHealth(),incomingdamage);
 		
 		
 		//construct a Move consisting of the most threatening attacking card and the best defense
-		move = new Move(attackingcard,defendingcard);
+		if(defendingcard ==null){
+			move = new UnblockedAttack(attackingcard,attacker,defender);
+			return move;
+		}
+		move = new BlockedAttack(attackingcard,defendingcard,attacker,defender);
 		//If a defending card was found, remove it from the Player's field
 		if(defendingcard!=null)
-			game.removeDefendingCard(defendingcard);
+			defender.removeDefendingCard(defendingcard);
 		return move;
 	}
 	/**
